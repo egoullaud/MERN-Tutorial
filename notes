@@ -21,3 +21,75 @@ put node_modules in gitignore - we don't need them on github
 
 how to remove folder from github, not from local
 git rm -r --cached myFolder
+
+add following: nodemon and express and write the following scripts:
+"start": "node server",
+"dev" : "nodemon server"
+
+Setting up Server!
+
+1. create server.js file and import express and path and set up port for server to run:
+   const express = require('express');
+   const app = express();
+   const path = require('path');
+   const PORT = process.env.PORT || 3500;
+2. Tell the app to "listen" so it runs server on port: this will go last on the server.js
+   app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+
+3. Tell express where to find static files like html and css: (look in the public directory)
+   app.use('/', express.static(path.join(\_\_dirname, '/public')));
+
+4. Create Public folder and CSS folder to add some basic styles to app
+
+5. Create Routes folder and root.js file - time to create a router for the app
+
+6. import express, router, and path:
+   const express = require('express');
+   const router = express.Router();
+   const path = require('path');
+
+7. get function for router:  
+    notes:
+   "^" = at beginning of string only
+   "$" = at end of the string only
+"|" = or
+"()?" = optional 
+code is: 
+router.get('^/$|/index(.html)?', (req,res) => {
+   //response is to send the file from path (directoryName/../views/index.html)
+   res.sendFile(path.join(\_\_dirname, '..','views','index.html'))
+   });
+
+8. export the module!
+   module.exports = router
+
+9. Create views folder and index.html file (shortcut is "!" will auto generate html)
+   -import link to css sheet and change title, add h1
+
+- app can find it because we set up a route to the static files
+
+10. Create 404 html page inside views folder
+
+11. back to server.js to handle any file not found _ add this after other routes, before the listen
+    "_" = all
+    everything that reaches this will get funneled through:
+    app.all('\*', (req,res) => {
+    // set status to error 404
+    res.status(404)
+
+//if request has "accepts header" in HTML then send views/404.html file
+if(req.accepts('html')) {
+res.sendFile(path.join(\_\_dirname, 'views', '404.html'))
+
+//if request has "accepts header" in json then send message
+} else if (req.accepts('json')) {
+res.json({ message: '404 Not Found'})
+} else {
+
+//if request is type txt then send message
+res.type('txt').send('404 not found')
+}
+})
+
+\*Test in the browser
+End of Lesson 1!
