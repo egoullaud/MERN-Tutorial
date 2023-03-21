@@ -149,3 +149,7 @@ c. 3rd Party
     \*recommends adding conditions to limit which requests are logged (only from other urls or something) otherwise the log will fill up fast.
 11. add module exports
     module.exports = {logEvents, logger}
+
+12. off to server.js to import logger with:
+    const {logger} = require('./middleware/logger')
+    add to app before other middleware: app.use(logger)
