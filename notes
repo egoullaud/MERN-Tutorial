@@ -153,3 +153,24 @@ c. 3rd Party
 12. off to server.js to import logger with:
     const {logger} = require('./middleware/logger')
     add to app before other middleware: app.use(logger)
+
+13. Create custom middleware to log errors!
+
+- add errorHandler.js to middleware folder
+- create function to log errors:
+  const errorHandler = ( err, req, res, next ) => {
+  logEvents(`${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
+  'errLog.log')
+  }
+
+14. check error to find status code
+    const status = res.statusCode ? res.statusCode : 500 //server error
+    //set status
+    res.status(status)
+    res.json({ message: err.message })
+
+15. export module and import it to server.js
+    const errorHandler = require('./middleware/errorHandler')
+
+16. add it above listener below everything else.
+    app.use(errorHandler)
