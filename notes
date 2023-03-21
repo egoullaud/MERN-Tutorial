@@ -313,9 +313,15 @@ console.log('Connected to MongoDB')
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 })
 
-9. Log errors with mongoose:
+9. Log errors with mongoose, import logEvents:
    mongooose.connection.on('error', err => {
    console.log(err)
    logEvents(`${err.no}: ${err.code}\t${req.syscall}\t${req.hostname}`,
    'mongoErrLog.log')
    })
+
+10. npm run dev to make sure MongoDB is up and running, yay!
+
+Lesson 4 - Controllers!
+
+Let's learn all the things about creating controllers for CRUD operations in our database.
