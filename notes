@@ -110,3 +110,42 @@ c. 3rd Party
 2. create logs folder - add to gitignore file
 3. create middleware folder - new file called logger.js
 4. install deps: npm i date-fns uuid
+5. import format, version uuid, path, and promises
+   const {format} = requre('date-fns')
+   const {v4: uuid} = require('uuid')
+   const fs = require('fs')
+   const fsPromises = require('fs').promises
+   const path=require('path')
+6. create logEvents function
+   const logEvents = async (message, logFileName) => {
+   const dateTime = `${format(new Date(), 'yyyMMdd\tHH:mm:ss')}`
+   const logItem = `${dateTime}\t${uuid()}\t${message}\n`
+
+}
+-template literal to format dates is from date-fns documentation
+-uuid create specific id number for each log item
+
+- "/n" creates new line
+
+7. Let's ask the server to look for a logs folder with an if statement:
+   if(!fs.existsSync(path.join(\_\_dirname, '..', 'logs')))
+
+- if it doesnt exist, then we will create it with:
+  await fsPromises.mkdir(path.join(\_\_dirname, '..', 'logs'))
+
+8. once we find the directory, or we create it, let's add the file to it with:
+   await fsPromises.appendFile(path.join(\_\_dirname, '..', 'logs',
+   logFileName), logItem)
+9. catch the errors with:
+   catch(err) {
+   console.log(err)
+   }
+10. write the actual middleware that will write the template literal into the log which is like a conventional text file:
+    const logger= (req, res, next) =>{
+    logEvents(`${req.method}\t${req.url}\t${req.headers.origin}`, 'reqLog.log')
+    console.log(`${req.method} ${req.path}`)
+    next()
+    }
+    \*recommends adding conditions to limit which requests are logged (only from other urls or something) otherwise the log will fill up fast.
+11. add module exports
+    module.exports = {logEvents, logger}
