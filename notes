@@ -93,3 +93,20 @@ res.type('txt').send('404 not found')
 
 \*Test in the browser
 End of Lesson 1!
+
+what is middleware?
+
+- one or more functions put in the middle of a HTTP request that is received by the API
+- can add additional functionality and preliminary request
+  types:
+
+a. Built-in
+eg. express.static() and app.use(express.json())
+b. Custom
+c. 3rd Party
+
+1. add built-in: Need to add JSON to our application so our server can parse incoming json
+   app.use(express.json())
+2. create logs folder - add to gitignore file
+3. create middleware folder - new file called logger.js
+4. install deps: npm i date-fns uuid
