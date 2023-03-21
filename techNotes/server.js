@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const {logger} = require('./middleware/logger')
 const errorHandler = require('./middleware/errorHandler')
+const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3500;
 
 
@@ -13,8 +14,13 @@ app.use(logger)
 //add json functionality
 app.use(express.json())
 
+//use cookie parser
+app.use(cookieParser())
+
+//find static files in the public folder
 app.use('/', express.static(path.join(__dirname, 'public')));
 //you can use a / or not, (/public or public)
+
 app.use('/', require('./routes/root'))
 
 app.all('*', (req,res) => {

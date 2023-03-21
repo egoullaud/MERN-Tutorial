@@ -94,6 +94,7 @@ res.type('txt').send('404 not found')
 \*Test in the browser
 End of Lesson 1!
 
+Lesson 2
 what is middleware?
 
 - one or more functions put in the middle of a HTTP request that is received by the API
@@ -104,6 +105,8 @@ a. Built-in
 eg. express.static() and app.use(express.json())
 b. Custom
 c. 3rd Party
+
+Add Built in and Custom
 
 1. add built-in: Need to add JSON to our application so our server can parse incoming json
    app.use(express.json())
@@ -174,3 +177,22 @@ c. 3rd Party
 
 16. add it above listener below everything else.
     app.use(errorHandler)
+
+Adding 3rd Party middleware!
+
+17. add cookie parser to deps
+    npm i cookie-parser
+
+18. import and use in server.js
+    const cookieParser = require('cookie-parser')
+
+- pop it below json: app.use(cookieParser())
+  EASY!
+
+19. Not so Easy CORS
+    CORS = Cross Origin Resource Sharing
+
+- need this so api can be accessed by something like google (like its a public API)
+- we will code up a "pre-flight" auth like the api is public and then secure it afterwards.
+
+install cors: npm i cors
