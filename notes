@@ -230,7 +230,7 @@ Lesson 3! MongoDB
    makes available throughout app
    add it to the gitignore
 
-2. Set up MongoDB account
+2. Set up MongoDB account \*\* do not use any special characters in passowrd. letters and numbers ONLY
    with name TechNotes DB and collections: users
    - Create new project
    - add collection to cluster
@@ -285,3 +285,37 @@ inc_field: 'ticket',
 id: 'ticketNums',
 start_seq: 500
 })
+
+6. add database connection file within config: dbConn.js
+   const mongoose = require('mongoose')
+
+const connectDB = async () => {
+try{
+await mongoose.connect(process.env.DATABASE_URI)
+} catch (err) {
+console.log(err)
+}
+}
+
+module.exports = connectDB
+
+7. head to server.js and make following imports below corsOptions:
+   const connectDB = require('./config/dbConn')
+   const mongoose = require('mongoose')
+   const { logEvents } = require('./middleware/logger')
+
+8. connect in server.js
+
+a. add connectDB() to top
+b. wrap app.listen in mongoose connection:
+mongoose.connection.once('open', () => {
+console.log('Connected to MongoDB')
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+})
+
+9. Log errors with mongoose:
+   mongooose.connection.on('error', err => {
+   console.log(err)
+   logEvents(`${err.no}: ${err.code}\t${req.syscall}\t${req.hostname}`,
+   'mongoErrLog.log')
+   })
