@@ -196,3 +196,27 @@ Adding 3rd Party middleware!
 - we will code up a "pre-flight" auth like the api is public and then secure it afterwards.
 
 install cors: npm i cors
+
+use it like a public API: app.use(cors())
+
+20. make it secure using cors options
+
+- make a congif folder
+- add allowedOrigins file and include the http links associated with the application, and the localhost links
+- add corsOptions file and import allowed origins
+  create cors options function:
+  const corsOptions = {
+  //origin, credentials, optionsSuccessStatus are all methods
+  origin: (origin, callback) => {
+  //to allow the https we specified, ||OR no origin so you can use postman to view api
+  if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+  callback(null, true)
+  } else {
+  callback(new Error('Not allowed by CORS'))
+  }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+  }
+- import corsOptions and pass into cors argument to secure API use
+  app.use(cors(corsOptions))
