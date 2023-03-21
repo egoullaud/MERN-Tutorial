@@ -3,8 +3,12 @@ const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3500;
 
-app.use('/', express.static(path.join(__dirname, '/public')));
 
+//add json functionality
+app.use(express.json())
+
+app.use('/', express.static(path.join(__dirname, 'public')));
+//you can use a / or not, (/public or public)
 app.use('/', require('./routes/root'))
 
 app.all('*', (req,res) => {
