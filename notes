@@ -220,3 +220,4 @@ use it like a public API: app.use(cors())
   }
 - import corsOptions and pass into cors argument to secure API use
   app.use(cors(corsOptions))
+  \*\*Note to self - when you're trying to test CORS with google.... actually go to google.com you fool.
