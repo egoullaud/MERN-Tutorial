@@ -14,6 +14,7 @@ Client interview - create markdown file checklist User Stories.md to make list o
 preview with control-shift-v
 
 open terminal hack - ctrl and `
+copy/paste body text = highlight code then shift+alt+down arrow
 
 build app THEN authetication last
 
@@ -221,3 +222,66 @@ use it like a public API: app.use(cors())
 - import corsOptions and pass into cors argument to secure API use
   app.use(cors(corsOptions))
   \*\*Note to self - when you're trying to test CORS with google.... actually go to google.com you fool.
+
+Lesson 3! MongoDB
+
+1. install environment variables: npm i dotenv and add it to server.js as:
+   require('dotenv').config()
+   makes available throughout app
+   add it to the gitignore
+
+2. Set up MongoDB account
+   with name TechNotes DB and collections: users
+   - Create new project
+   - add collection to cluster
+   - connect from anywhere
+   - copy access strong and paste into .env file and replace password and add database name
+     in between / and ?retryWrites
+3. install mongoose to better communicate with mongoDB
+   npm i mongoose
+4. create model folder with User.js <- we are creating schemas!
+   import mongoose and create userSchema function:
+   const userSchema = new mongoose.Schema({
+   //data model goes here
+   username: {
+   type: String,
+   required: true
+   },
+   password: {
+   type: String,
+   required: true
+   },
+   //this is an array, data within will be a string
+   roles: [{
+   type: String,
+   default:"Employee"
+   }],
+   active: {
+   type: Boolean,
+   default: true
+   }
+   })
+
+- look back at user stories to determine what data we need in our schema
+  username and PW
+  user roles
+  active status
+
+make model then export as:
+
+module.exports = mongoose.model('User', userSchema) <- name it, then choose function
+
+5. ticket numbers in sequence -> install npm i mongoose-sequence
+   import: const AutoIncrement = require('mongoose-sequence')(mongoose)
+
+{
+//timestamps are options in mongoDB
+timestamps: true
+}
+)
+//use sequence to make ticket numbers
+noteSchema.plugin(AutoIncrement, {
+inc_field: 'ticket',
+id: 'ticketNums',
+start_seq: 500
+})
