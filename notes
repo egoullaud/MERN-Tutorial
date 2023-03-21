@@ -16,3 +16,8 @@ preview with control-shift-v
 open terminal hack - ctrl and `
 
 build app THEN authetication last
+
+put node_modules in gitignore - we don't need them on github
+
+how to remove folder from github, not from local
+git rm -r --cached myFolder
