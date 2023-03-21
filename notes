@@ -1,4 +1,4 @@
-David Gray MERN Tutorial 
+David Gray MERN Tutorial
 
 MongoDB
 Express JS
@@ -8,4 +8,11 @@ Node JS
 Create = POST
 Read = GET
 Update = PUT/PATCH
-Delete = DELETE 
+Delete = DELETE
+
+Client interview - create markdown file checklist User Stories.md to make list of action items for project
+preview with control-shift-v
+
+open terminal hack - ctrl and `
+
+build app THEN authetication last
