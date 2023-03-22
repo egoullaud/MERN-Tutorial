@@ -325,3 +325,34 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 Lesson 4 - Controllers!
 
 Let's learn all the things about creating controllers for CRUD operations in our database.
+
+1.  lets route our user
+    create userRoutes.js in routes folder:
+    const express = require('express')
+    const router = express.Router()
+
+router.route('/')
+.get()
+.post()
+.patch()
+.delete()
+
+module.exports = router
+
+2. add controller folder and usersController.js
+   import user and note from models folder
+
+3. add following deps:
+   npm i express-async-handler bcrypt
+
+express-async-handler: saves us time doing less try-catches because async methods with mongoose allow us to find data in mongoDB
+bcrypt: will encrypt password (hash password) before saving
+
+4. bring in deps and write out functions for CRUD without logic, and export modules
+
+5. complete routes:
+   .get(usersController.getAllUsers)
+   .post(usersController.createNewUser)
+   .patch(usersController.updateUser)
+   .delete(usersController.deleteUser)
+6. add logic to controller functions: see doc its pretty straightforward
