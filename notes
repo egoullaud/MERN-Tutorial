@@ -356,3 +356,5 @@ bcrypt: will encrypt password (hash password) before saving
    .patch(usersController.updateUser)
    .delete(usersController.deleteUser)
 6. add logic to controller functions: see doc its pretty straightforward
+7. test the functionality with Postman! \*\* make sure to add the route to the server.js:
+   app.use('/users', require('./routes/userRoutes'))
